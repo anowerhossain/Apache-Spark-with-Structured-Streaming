@@ -67,7 +67,7 @@ WHERE temperature < 18 OR temperature > 60;
 
 + Calculates the average temperature and humidity for each room over a 1-minute sliding window.
 
-```sql
+```sparksql
 SELECT room_id, 
        AVG(temperature) AS avg_temperature, 
        AVG(humidity) AS avg_humidity, 
