@@ -6,8 +6,8 @@ This project demonstrates how to leverage Apache Spark for real-time monitoring 
 ## 📝 Tasks Performed
 
 1. 📦 Install Required Packages
-Installed PySpark and FindSpark to set up the Spark environment locally.
-Suppressed warnings for cleaner outputs.
+* Installed PySpark and FindSpark to set up the Spark environment locally.
+* Suppressed warnings for cleaner outputs.
 
 ```bash
 !pip install pyspark==3.1.2 -q
