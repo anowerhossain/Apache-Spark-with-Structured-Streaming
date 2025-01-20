@@ -87,4 +87,47 @@ WHERE humidity < 45 OR humidity > 75
 GROUP BY room_id;
 ```
 
+6. 📥 Execute SQL Queries
+* Executed the SQL queries on the simulated streaming data to generate insights:
 
+```python
+critical_temperatures_stream = spark.sql(critical_temperature_query)
+average_readings_stream = spark.sql(average_readings_query)
+attention_needed_stream = spark.sql(attention_needed_query)
+```
+
+7. 📤 Output Results to Console
+* Displayed the results of each query in real-time for immediate insights:
+
+** Critical Temperatures **
+Displays rooms with extreme temperature conditions.
+
+```python
+critical_temperatures_stream.writeStream \
+    .outputMode("append") \
+    .format("console") \
+    .queryName("Critical Temperatures") \
+    .start()
+```
+
+** Average Readings **
+Shows the 1-minute average temperature and humidity for each room.
+
+```python
+average_readings_stream.writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .queryName("Average Readings") \
+    .start()
+```
+
+** Attention Needed **
+Lists rooms requiring immediate attention due to abnormal humidity.
+
+```python
+attention_needed_stream.writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .queryName("Attention Needed") \
+    .start()
+```
