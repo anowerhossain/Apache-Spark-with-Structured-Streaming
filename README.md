@@ -16,8 +16,8 @@ This project demonstrates how to leverage Apache Spark for real-time monitoring 
 ```
 
 2. 🛠️ Set Up Spark Session
-Initialized a Spark session named Smart Building HVAC Monitoring.
-Spark handles distributed data processing for real-time analytics.
+* Initialized a Spark session named Smart Building HVAC Monitoring.
+* Spark handles distributed data processing for real-time analytics.
 
 ```python
 from pyspark.sql import SparkSession
@@ -25,6 +25,29 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder \
     .appName("Smart Building HVAC Monitoring") \
     .getOrCreate()
+```
+
+3. 🔄 Simulate Real-Time Sensor Data
+Used Spark’s rate source to simulate continuous streaming data.
+Each row includes:
+* room_id: Unique identifier for a room.
+* temperature: Randomized temperature readings.
+* humidity: Randomized humidity readings.
+
+```python
+from pyspark.sql.functions import expr, rand, when
+
+sensor_data = spark.readStream.format("rate").option("rowsPerSecond", 5).load() \
+    .withColumn("room_id", expr("CAST(value % 10 AS STRING)")) \
+    .withColumn("temperature", when(expr("value % 10 == 0"), 15).otherwise(20 + rand() * 25)) \
+    .withColumn("humidity", expr("40 + rand() * 30"))
+```
+
+4. 📋 Create Temporary SQL View
+* Created a temporary SQL view to query the streaming data easily using Spark SQL.
+
+```python
+sensor_data.createOrReplaceTempView("sensor_table")
 ```
 
 
