@@ -9,10 +9,23 @@ This project demonstrates how to leverage Apache Spark for real-time monitoring 
 Installed PySpark and FindSpark to set up the Spark environment locally.
 Suppressed warnings for cleaner outputs.
 
-```python
-# Python example
-def greet(name):
-    return f"Hello, {name}!"
+```bash
+!pip install pyspark==3.1.2 -q
+!pip install findspark -q
 
-print(greet("World"))
+```
+
+2. 🛠️ Set Up Spark Session
+Initialized a Spark session named Smart Building HVAC Monitoring.
+Spark handles distributed data processing for real-time analytics.
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("Smart Building HVAC Monitoring") \
+    .getOrCreate()
+```
+
+
 
