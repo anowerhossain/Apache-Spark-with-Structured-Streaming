@@ -5,7 +5,7 @@ This project demonstrates how to leverage Apache Spark for real-time monitoring 
 
 ## 📝 Tasks Performed
 
-1. 📦 Install Required Packages
+### 1. 📦 Install Required Packages
 * Installed PySpark and FindSpark to set up the Spark environment locally.
 * Suppressed warnings for cleaner outputs.
 
@@ -15,7 +15,7 @@ This project demonstrates how to leverage Apache Spark for real-time monitoring 
 
 ```
 
-2. 🛠️ Set Up Spark Session
+### 2. 🛠️ Set Up Spark Session
 * Initialized a Spark session named Smart Building HVAC Monitoring.
 * Spark handles distributed data processing for real-time analytics.
 
@@ -27,7 +27,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 ```
 
-3. 🔄 Simulate Real-Time Sensor Data
+### 3. 🔄 Simulate Real-Time Sensor Data
 Used Spark’s rate source to simulate continuous streaming data.
 Each row includes:
 * room_id: Unique identifier for a room.
@@ -43,14 +43,14 @@ sensor_data = spark.readStream.format("rate").option("rowsPerSecond", 5).load() 
     .withColumn("humidity", expr("40 + rand() * 30"))
 ```
 
-4. 📋 Create Temporary SQL View
+### 4. 📋 Create Temporary SQL View
 * Created a temporary SQL view to query the streaming data easily using Spark SQL.
 
 ```python
 sensor_data.createOrReplaceTempView("sensor_table")
 ```
 
-5. 🔍 Define Analytical SQL Queries
+### 5. 🔍 Define Analytical SQL Queries
 * Defined three SQL queries for real-time analysis:
 
 🔴 Critical Temperatures Query
@@ -87,7 +87,7 @@ WHERE humidity < 45 OR humidity > 75
 GROUP BY room_id;
 ```
 
-6. 📥 Execute SQL Queries
+### 6. 📥 Execute SQL Queries
 * Executed the SQL queries on the simulated streaming data to generate insights:
 
 ```python
@@ -96,7 +96,7 @@ average_readings_stream = spark.sql(average_readings_query)
 attention_needed_stream = spark.sql(attention_needed_query)
 ```
 
-7. 📤 Output Results to Console
+### 7. 📤 Output Results to Console
 * Displayed the results of each query in real-time for immediate insights:
 
 **Critical Temperatures**
@@ -132,7 +132,7 @@ attention_needed_stream.writeStream \
     .start()
 ```
 
-8. ⏱️ Keep Streams Running
+### 8. ⏱️ Keep Streams Running
 * Ensured that the streaming queries remain active to process real-time data continuously.
 
 ```python
@@ -141,6 +141,6 @@ average_query.awaitTermination()
 attention_query.awaitTermination()
 ```
 
-# 📧 Contact
+## 📧 Contact
 
 For any questions or suggestions, please reach out to anowerhossain97@gmail.com.
