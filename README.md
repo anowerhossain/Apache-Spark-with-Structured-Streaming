@@ -131,3 +131,16 @@ attention_needed_stream.writeStream \
     .queryName("Attention Needed") \
     .start()
 ```
+
+8. ⏱️ Keep Streams Running
+* Ensured that the streaming queries remain active to process real-time data continuously.
+
+```python
+critical_query.awaitTermination()
+average_query.awaitTermination()
+attention_query.awaitTermination()
+```
+
+# 📧 Contact
+
+For any questions or suggestions, please reach out to anowerhossain97@gmail.com.
