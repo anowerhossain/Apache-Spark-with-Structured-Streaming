@@ -99,8 +99,8 @@ attention_needed_stream = spark.sql(attention_needed_query)
 7. 📤 Output Results to Console
 * Displayed the results of each query in real-time for immediate insights:
 
-** Critical Temperatures **
-Displays rooms with extreme temperature conditions.
+**Critical Temperatures**
+- Displays rooms with extreme temperature conditions.
 
 ```python
 critical_temperatures_stream.writeStream \
@@ -110,8 +110,8 @@ critical_temperatures_stream.writeStream \
     .start()
 ```
 
-** Average Readings **
-Shows the 1-minute average temperature and humidity for each room.
+**Average Readings**
+- Shows the 1-minute average temperature and humidity for each room.
 
 ```python
 average_readings_stream.writeStream \
@@ -121,8 +121,8 @@ average_readings_stream.writeStream \
     .start()
 ```
 
-** Attention Needed **
-Lists rooms requiring immediate attention due to abnormal humidity.
+**Attention Needed**
+- Lists rooms requiring immediate attention due to abnormal humidity.
 
 ```python
 attention_needed_stream.writeStream \
