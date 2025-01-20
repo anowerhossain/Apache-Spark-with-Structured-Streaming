@@ -50,5 +50,41 @@ sensor_data = spark.readStream.format("rate").option("rowsPerSecond", 5).load() 
 sensor_data.createOrReplaceTempView("sensor_table")
 ```
 
+5. 🔍 Define Analytical SQL Queries
+* Defined three SQL queries for real-time analysis:
+
+🔴 Critical Temperatures Query
+
++ Detects rooms with extreme temperatures (below 18°C or above 60°C).
+
+```sql
+SELECT room_id, temperature, humidity, timestamp 
+FROM sensor_table 
+WHERE temperature < 18 OR temperature > 60;
+```
+
+📊 Average Readings Query
+
++ Calculates the average temperature and humidity for each room over a 1-minute sliding window.
+
+```sql
+SELECT room_id, 
+       AVG(temperature) AS avg_temperature, 
+       AVG(humidity) AS avg_humidity, 
+       window.start AS window_start 
+FROM sensor_table
+GROUP BY room_id, window(timestamp, '1 minute');
+```
+
+⚠️ Attention Needed Query
+
++ Identifies rooms with abnormal humidity levels (below 45% or above 75%).
+
+```sql
+SELECT room_id, COUNT(*) AS critical_readings 
+FROM sensor_table 
+WHERE humidity < 45 OR humidity > 75
+GROUP BY room_id;
+```
 
 
